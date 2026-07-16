@@ -9,13 +9,14 @@ const busRoutes = require('./src/routes/buses');
 const driverRoutes = require('./src/routes/drivers');
 const studentRoutes = require('./src/routes/students');
 const trackingRoutes = require('./src/routes/tracking');
-
+const driverLoginRoutes = require('./src/routes/driverLogin');
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/auth', driverLoginRoutes);
 app.use('/api/schools', schoolRoutes);
 app.use('/api/buses', busRoutes);
 app.use('/api/drivers', driverRoutes);
@@ -27,5 +28,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+  console.log(`Server running on port http://localhost:${process.env.PORT}`);
 });
