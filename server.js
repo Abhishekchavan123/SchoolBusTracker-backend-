@@ -10,6 +10,7 @@ const driverRoutes = require('./src/routes/drivers');
 const studentRoutes = require('./src/routes/students');
 const trackingRoutes = require('./src/routes/tracking');
 const driverLoginRoutes = require('./src/routes/driverLogin');
+const tripRoutes = require("./src/routes/trips");
 const app = express();
 
 app.use(cors());
@@ -20,6 +21,7 @@ app.use('/api/auth', driverLoginRoutes);
 app.use('/api/schools', schoolRoutes);
 app.use('/api/buses', busRoutes);
 app.use('/api/drivers', driverRoutes);
+app.use("/api/trips", tripRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/tracking', trackingRoutes);
 

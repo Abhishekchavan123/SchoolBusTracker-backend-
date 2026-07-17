@@ -72,5 +72,34 @@ router.get('/', async (req, res) => {
     });
   }
 });
+// GET SINGLE BUS BY ID
+router.get('/:busId', async (req, res) => {
+  try {
+    const { busId } = req.params;
 
+    const { data, error } = await supabase
+      .from('buses')
+      .select('*')
+      .eq('id', busId)
+      .single();
+
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        error: error.message
+      });
+    }
+
+    res.json({
+      success: true,
+      bus: data
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
+});
 module.exports = router;

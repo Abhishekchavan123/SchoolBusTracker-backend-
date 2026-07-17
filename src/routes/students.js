@@ -103,5 +103,34 @@ router.get('/', async (req, res) => {
     });
   }
 });
+// GET STUDENT BY PARENT USER ID
+router.get('/parent/:parentId', async (req, res) => {
+  try {
+    const { parentId } = req.params;
 
+    const { data, error } = await supabase
+      .from('students')
+      .select('*')
+      .eq('parent_user_id', parentId)
+      .single();
+
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        error: error.message
+      });
+    }
+
+    return res.json({
+      success: true,
+      student: data
+    });
+
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
+});
 module.exports = router;
