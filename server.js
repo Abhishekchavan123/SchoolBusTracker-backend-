@@ -10,6 +10,7 @@ const driverRoutes = require('./src/routes/drivers');
 const studentRoutes = require('./src/routes/students');
 const trackingRoutes = require('./src/routes/tracking');
 const driverLoginRoutes = require('./src/routes/driverLogin');
+const parentLoginRoutes = require('./src/routes/parentLogin');
 const tripRoutes = require("./src/routes/trips");
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/auth', driverLoginRoutes);
+app.use('/api/auth', parentLoginRoutes);
 app.use('/api/schools', schoolRoutes);
 app.use('/api/buses', busRoutes);
 app.use('/api/drivers', driverRoutes);
