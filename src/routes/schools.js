@@ -1,7 +1,30 @@
 const express = require('express');
 const router = express.Router();
 const { supabase } = require('../supabaseClient');
+// Get all schools
+router.get('/', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('schools')
+      .select('*')
+      .order('school_name');
 
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        error: error.message,
+      });
+    }
+
+    res.json(data);
+
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
+  }
+});
 router.post('/', async (req, res) => {
   try {
     const {
@@ -41,7 +64,7 @@ router.post('/', async (req, res) => {
       .from('users')
       .insert({
         name: admin_name,
-     // remove this line if users table doesn't have user_id column
+        // remove this line if users table doesn't have user_id column
         email: email,
         password: password,
         role: 'school_admin',
